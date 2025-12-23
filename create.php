@@ -1,23 +1,29 @@
 <?php
 include 'includes/auth.php';
 include 'includes/config.php';
+require 'vendor/autoload.php'; // Carrega o Composer
 require_once 'classes/Cliente.php';
+require_once 'classes/EmailService.php'; // Carrega nosso serviço de email
 
-// Se enviou o formulário
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Instancia o cliente
     $cliente = new Cliente($pdo);
-
-    // Define os valores nos atributos do objeto
     $cliente->nome = $_POST['nome'];
     $cliente->email = $_POST['email'];
     $cliente->telefone = $_POST['telefone'];
 
-    // Chama o método criar()
-    if ($cliente->criar()) {
-        header("Location: index.php"); // Sucesso
+    if ($cliente->criar()) {       
+        // --- Em vez de enviar, agendamos na fila ---
+        $sqlFila = "INSERT INTO fila_emails (email_destino, nome_destino) VALUES (:email, :nome)";
+        $stmtFila = $pdo->prepare($sqlFila);
+        $stmtFila->execute([
+            ':email' => $cliente->email,
+            ':nome' => $cliente->nome
+        ]);
+        // ----------------------------------------------------
+
+        header("Location: index.php?msg=sucesso");
     } else {
-        echo "Erro ao cadastrar."; // Falha (em produção usaríamos um alerta melhor)
+        echo "Erro ao cadastrar.";
     }
     exit;
 }

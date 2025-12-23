@@ -20,6 +20,8 @@ Este projeto foi migrado de PHP estruturado para POO para atender padrões de me
 - **Banco de Dados:** MySQL / MariaDB
 - **Front-end:** Bootstrap 5 (Responsivo)
 - **Alertas:** SweetAlert2
+- **Performance e Assincronismo:** Implementação de fila no banco de dados para envio de e-mails em segundo plano (Background Worker), evitando travamento da interface do usuário.
+- **Rotina de Limpeza:** Worker configurado para auto-limpeza de logs antigos a cada ciclo.
 
 ## ⚙️ Estrutura de Pastas
 ```text
