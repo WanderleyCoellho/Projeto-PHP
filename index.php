@@ -15,6 +15,9 @@ include 'includes/header.php';
 
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h3>Gerenciar Usuários</h3>
+    <a href="relatorio.php" target="_blank" class="btn btn-secondary me-2">
+            <i class="bi bi-file-earmark-pdf"></i> Gerar PDF
+    </a>
     <a href="create.php" class="btn btn-success">
         <i class="bi bi-plus-lg"></i> Novo Usuário
     </a>

@@ -1,0 +1,12 @@
+# Ignorar dependências do Composer (MUITO IMPORTANTE)
+/vendor/
+
+# Ignorar ficheiros de configuração do VS Code
+.vscode/
+
+# Ignorar ficheiros do sistema
+Thumbs.db
+.DS_Store
+
+# Ignorar logs de erro
+*.log
